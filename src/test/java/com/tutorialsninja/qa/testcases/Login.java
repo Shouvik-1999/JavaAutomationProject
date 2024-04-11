@@ -1,12 +1,8 @@
 package com.tutorialsninja.qa.testcases;
 
-import java.util.Date;
-import static com.tutorialsninja.qa.utilities.Utilities.*;
-import java.util.concurrent.TimeUnit;
+import static com.tutorialsninja.qa.utilities.Utilities.generateEmailWithTimeStamp;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -16,6 +12,9 @@ import com.tutorialninja.qa.Common.WebSetUp;
 
 public class Login extends WebSetUp {
 
+	public Login() {
+		super();
+	}
 	
 	@BeforeMethod
 	public void setup() {
