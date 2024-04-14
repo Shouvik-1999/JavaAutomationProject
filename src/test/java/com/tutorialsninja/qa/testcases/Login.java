@@ -1,71 +1,100 @@
 package com.tutorialsninja.qa.testcases;
 
-import static com.tutorialsninja.qa.utilities.Utilities.generateEmailWithTimeStamp;
+import static com.tutorialsninja.qa.utilities.Utilities.*;
 
-import org.openqa.selenium.By;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.tutorialninja.qa.Common.WebSetUp;
+import com.tutorialninja.qa.pages.HomePage;
+import com.tutorialninja.qa.pages.LoginPage;
+import com.tutorialninja.qa.pages.AccountPage;
+
+
+import static com.tutorialninja.qa.pages.HomePage.*;
+import static com.tutorialninja.qa.pages.LoginPage.*;
+import static com.tutorialninja.qa.pages.AccountPage.*;
 
 public class Login extends WebSetUp {
 
 	public Login() {
 		super();
 	}
-	
+
 	@BeforeMethod
 	public void setup() {
 		webSetup();
-		
+		new HomePage();
+		new LoginPage();
+		new AccountPage();
 	}
-	
+
 	@AfterMethod
 	public void tearDown() {
 		driver.quit();
 	}
+
 	
 	@Test(priority = 1)
 	public void verfyLoginWithValidCreds() {
-		driver.findElement(By.xpath("//span[text()='My Account']")).click();
-		driver.findElement(By.linkText("Login")).click();
-		driver.findElement(By.id("input-email")).sendKeys("krshouvik@gmail.com");
-		driver.findElement(By.id("input-password")).sendKeys("Skar@1999");
-		driver.findElement(By.xpath("//input[@value='Login']")).click();
-		Assert.assertTrue(driver.findElement(By.linkText("Change your password")).isDisplayed(),"Login Failed");
-		
-		
+		clickMyAccntDropDown();
+		clickLoginOption();
+		enterEmailID(prop.getProperty("userName"));
+		enterPassword(prop.getProperty("validPassword"));
+		clickLoginButton();
+		Assert.assertTrue(validateUserLogin(),"Login Failed");
 	}
+
 	
 	@Test(priority = 2)
 	public void verifyLoginWithInvalidCreds() {
-		driver.findElement(By.xpath("//span[text()='My Account']")).click();
-		driver.findElement(By.linkText("Login")).click();
-		driver.findElement(By.id("input-email")).sendKeys(generateEmailWithTimeStamp());
-		driver.findElement(By.id("input-password")).sendKeys("12334");
-		driver.findElement(By.xpath("//input[@value='Login']")).click();
-		String actualWarning=driver.findElement(By.xpath("//div[contains(@class,'alert')]")).getText();
-		String expectedWarning="Warning: No match for E-Mail Address and/or Password.";
-		Assert.assertEquals(actualWarning, expectedWarning);
-		
-		
+		clickMyAccntDropDown();
+		clickLoginOption();
+		enterEmailID(generateEmailWithTimeStamp());
+		enterPassword(dataProp.getProperty("invalidPassword"));
+		clickLoginButton();
+		String actualWarning=retrieveEmailPasswordNotMatchingWarning();
+		String expectedWarning=dataProp.getProperty("errorLoginMessage");
+		Assert.assertEquals(actualWarning, expectedWarning,"Warning Message Mismatch");
 	}
+
 	
+	@Test(priority = 3,dataProvider = "getDataProvider")
+	public void verifyLoginWithInvalidCreds2(String ID,String Password) {
+		clickMyAccntDropDown();
+		clickLoginOption();
+		enterEmailID(ID);
+		enterPassword(Password);
+		clickLoginButton();
+		String actualWarning=retrieveEmailPasswordNotMatchingWarning();
+		String expectedWarning=dataProp.getProperty("errorLoginMessage");
+		Assert.assertEquals(actualWarning, expectedWarning,"Warning Message Mismatch");
+	}
+
+
+	@DataProvider
+	public  Object[][] getDataProvider() {
+		Object[][] data=getData();
+		return data;
+	}
+
+
 	@Test(priority = 4)
 	public void verifyLoginWithInvalidPass() {
-		driver.findElement(By.xpath("//span[text()='My Account']")).click();
-		driver.findElement(By.linkText("Login")).click();
-		driver.findElement(By.id("input-email")).sendKeys("krshouvik@gmail.com");
-		driver.findElement(By.id("input-password")).sendKeys("12334");
-		driver.findElement(By.xpath("//input[@value='Login']")).click();
-		String actualWarning=driver.findElement(By.xpath("//div[contains(@class,'alert')]")).getText();
-		String expectedWarning="Warning: No match for E-Mail Address and/or Password.";
-		Assert.assertEquals(actualWarning, expectedWarning);
-		
+		clickMyAccntDropDown();
+		clickLoginOption();
+		enterEmailID(prop.getProperty("userName"));
+		enterEmailID(dataProp.getProperty("invalidPassword"));
+		clickLoginButton();
+		String actualWarning=retrieveEmailPasswordNotMatchingWarning();
+		String expectedWarning=dataProp.getProperty("errorLoginMessage");
+		Assert.assertEquals(actualWarning, expectedWarning,"Warning Message Mismatch");
 	}
-	
+
 
 
 }

@@ -25,16 +25,16 @@ public class Search extends WebSetUp{
 	
 	@Test(priority=1)
 	public void searchWithValidItem() {
-		driver.findElement(By.name("search")).sendKeys("HP");
+		driver.findElement(By.name("search")).sendKeys(dataProp.getProperty("validSearchItem"));
 		driver.findElement(By.xpath("//div[@id='search']/child::span/child::button")).click();
 		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='HP LP3065']")).isDisplayed());
 	}
 	
 	@Test(priority = 2)
 	public void serachWithInvalidItem() {
-		driver.findElement(By.name("search")).sendKeys("Honda");
+		driver.findElement(By.name("search")).sendKeys(dataProp.getProperty("invalidSearchItem"));
 		driver.findElement(By.xpath("//div[@id='search']/child::span/child::button")).click();
-		Assert.assertEquals(driver.findElement(By.xpath("//p[contains(text(),'no product')]")).getText(), "There is no product that matches the search criteria.");
+		Assert.assertEquals(driver.findElement(By.xpath("//p[contains(text(),'no product')]")).getText(), dataProp.getProperty("invalidSearchMessage"));
 	}
 
 }
