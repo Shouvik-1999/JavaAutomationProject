@@ -1,5 +1,6 @@
 package com.tutorialsninja.qa.testcases;
 
+import static com.tutorialninja.qa.pages.HomePage.clickMyAccntDropDown;
 import static com.tutorialsninja.qa.utilities.Utilities.generateEmailWithTimeStamp;
 
 import org.openqa.selenium.By;
@@ -9,6 +10,18 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.tutorialninja.qa.Common.WebSetUp;
+import com.tutorialninja.qa.pages.AccountSuccessPage;
+import com.tutorialninja.qa.pages.HomePage;
+import com.tutorialninja.qa.pages.LoginPage;
+import com.tutorialninja.qa.pages.RegisterPage;
+
+import static com.tutorialninja.qa.pages.HomePage.*;
+import static com.tutorialninja.qa.pages.LoginPage.*;
+import static com.tutorialninja.qa.pages.RegisterPage.*;
+import static com.tutorialninja.qa.pages.AccountSuccessPage.*;
+
+
+
 
 public class Register extends WebSetUp{
 	
@@ -19,24 +32,29 @@ public class Register extends WebSetUp{
 	@BeforeMethod
 	public void setup() {
 		webSetup();
+		new HomePage();
+		new LoginPage();
+		new RegisterPage();
+		new AccountSuccessPage();
+		
 	}
 
 	
 	@Test(priority = 1)
 	public void verifyRegisteringAccountWithMandatoryFields() {
-		driver.findElement(By.xpath("//span[text()='My Account']")).click();
-		driver.findElement(By.linkText("Register")).click();
-		driver.findElement(By.id("input-firstname")).sendKeys("Shouvik");
-		driver.findElement(By.id("input-lastname")).sendKeys("Kar");
-		driver.findElement(By.id("input-email")).sendKeys(generateEmailWithTimeStamp());
-		driver.findElement(By.id("input-telephone")).sendKeys("1234567890");
-		driver.findElement(By.name("password")).sendKeys("Skar@1234");
-		driver.findElement(By.name("confirm")).sendKeys("Skar@1234");
-		driver.findElement(By.name("agree")).click();
+		clickMyAccntDropDown();
+		clickRegisterOption();
+		enterFirstname(dataProp.getProperty("firstName"));
+		enterlastname(dataProp.getProperty("lastName"));
+		enterEmailID(generateEmailWithTimeStamp());
+		enterTelePhone(dataProp.getProperty("telephone"));
+		enterRegisterPassword(prop.getProperty("validPassword"));
+		enterRegisterConfirmPassword(prop.getProperty("validPassword"));
+		clickAgreeCheckBox();
 
-		driver.findElement(By.xpath("//input[@type='submit']")).click();
-		String Actual=driver.findElement(By.xpath("//div[@id='content']//h1")).getText();
-		Assert.assertEquals(Actual, "Your Account Has Been Created!");
+		clickRegisterSubmitButton();
+		String Actual = getAccountCreationSuccessMessage();
+		Assert.assertEquals(Actual,dataProp.getProperty("accountCreationSuccessMessage"),"Account creation Unsuccessful");
 	}
 
 	
