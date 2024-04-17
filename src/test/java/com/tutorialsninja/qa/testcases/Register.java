@@ -1,6 +1,6 @@
 package com.tutorialsninja.qa.testcases;
 
-import static com.tutorialninja.qa.pages.HomePage.clickMyAccntDropDown;
+
 import static com.tutorialsninja.qa.utilities.Utilities.generateEmailWithTimeStamp;
 
 import org.openqa.selenium.By;
@@ -42,17 +42,14 @@ public class Register extends WebSetUp{
 	
 	@Test(priority = 1)
 	public void verifyRegisteringAccountWithMandatoryFields() {
-		clickMyAccntDropDown();
-		clickRegisterOption();
-		enterFirstname(dataProp.getProperty("firstName"));
-		enterlastname(dataProp.getProperty("lastName"));
-		enterEmailID(generateEmailWithTimeStamp());
-		enterTelePhone(dataProp.getProperty("telephone"));
-		enterRegisterPassword(prop.getProperty("validPassword"));
-		enterRegisterConfirmPassword(prop.getProperty("validPassword"));
-		clickAgreeCheckBox();
-
-		clickRegisterSubmitButton();
+		navigateToRegisterPage();
+		registerUserWithMandatoryFields(dataProp.getProperty("firstName"), 
+										dataProp.getProperty("lastName"), 
+										generateEmailWithTimeStamp(), 
+										dataProp.getProperty("telephone"), 
+										prop.getProperty("validPassword")
+										);
+		
 		String Actual = getAccountCreationSuccessMessage();
 		Assert.assertEquals(Actual,dataProp.getProperty("accountCreationSuccessMessage"),"Account creation Unsuccessful");
 	}

@@ -38,7 +38,17 @@ public class HomePage extends WebSetUp {
 		loginOption.click();
 	}
 	
+	public static void navigateToLoginPage() {
+		myAccountDropMenu.click();
+		loginOption.click();
+	}
+	
 	public static void clickRegisterOption() {
+		registerOption.click();
+	}
+	
+	public static void navigateToRegisterPage() {
+		myAccountDropMenu.click();
 		registerOption.click();
 	}
 	

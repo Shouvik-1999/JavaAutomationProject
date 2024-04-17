@@ -41,8 +41,7 @@ public class Login extends WebSetUp {
 	
 	@Test(priority = 1)
 	public void verfyLoginWithValidCreds() {
-		clickMyAccntDropDown();
-		clickLoginOption();
+		navigateToLoginPage();
 		enterEmailID(prop.getProperty("userName"));
 		enterPassword(prop.getProperty("validPassword"));
 		clickLoginButton();
@@ -52,8 +51,7 @@ public class Login extends WebSetUp {
 	
 	@Test(priority = 2)
 	public void verifyLoginWithInvalidCreds() {
-		clickMyAccntDropDown();
-		clickLoginOption();
+		navigateToLoginPage();
 		enterEmailID(generateEmailWithTimeStamp());
 		enterPassword(dataProp.getProperty("invalidPassword"));
 		clickLoginButton();
@@ -65,8 +63,7 @@ public class Login extends WebSetUp {
 	
 	@Test(priority = 3,dataProvider = "getDataProvider")
 	public void verifyLoginWithInvalidCreds2(String ID,String Password) {
-		clickMyAccntDropDown();
-		clickLoginOption();
+		navigateToLoginPage();
 		enterEmailID(ID);
 		enterPassword(Password);
 		clickLoginButton();
@@ -85,10 +82,9 @@ public class Login extends WebSetUp {
 
 	@Test(priority = 4)
 	public void verifyLoginWithInvalidPass() {
-		clickMyAccntDropDown();
-		clickLoginOption();
+		navigateToLoginPage();
 		enterEmailID(prop.getProperty("userName"));
-		enterEmailID(dataProp.getProperty("invalidPassword"));
+		enterPassword(dataProp.getProperty("invalidPassword"));
 		clickLoginButton();
 		String actualWarning=retrieveEmailPasswordNotMatchingWarning();
 		String expectedWarning=dataProp.getProperty("errorLoginMessage");
