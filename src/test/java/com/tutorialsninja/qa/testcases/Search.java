@@ -1,12 +1,15 @@
 package com.tutorialsninja.qa.testcases;
 
-import org.openqa.selenium.By;
+
+import static com.tutorialsninja.qa.pages.SearchPage.*;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.tutorialninja.qa.Common.WebSetUp;
+import com.tutorialsninja.qa.Common.WebSetUp;
+import com.tutorialsninja.qa.pages.SearchPage;
 
 public class Search extends WebSetUp{
 	
@@ -17,6 +20,7 @@ public class Search extends WebSetUp{
 	@BeforeMethod
 	public void setup() {
 		 webSetup();
+		 new SearchPage();
 	}
 	@AfterMethod
 	public void tearDown() {
@@ -25,16 +29,14 @@ public class Search extends WebSetUp{
 	
 	@Test(priority=1)
 	public void searchWithValidItem() {
-		driver.findElement(By.name("search")).sendKeys(dataProp.getProperty("validSearchItem"));
-		driver.findElement(By.xpath("//div[@id='search']/child::span/child::button")).click();
-		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='HP LP3065']")).isDisplayed());
+		searchItem(dataProp.getProperty("validSearchItem"));
+		Assert.assertTrue(searchValidItemResult(),"No such item found");
 	}
 	
 	@Test(priority = 2)
-	public void serachWithInvalidItem() {
-		driver.findElement(By.name("search")).sendKeys(dataProp.getProperty("invalidSearchItem"));
-		driver.findElement(By.xpath("//div[@id='search']/child::span/child::button")).click();
-		Assert.assertEquals(driver.findElement(By.xpath("//p[contains(text(),'no product')]")).getText(), dataProp.getProperty("invalidSearchMessage"));
+	public void searchWithInvalidItem() {
+		searchItem(dataProp.getProperty("invalidSearchItem"));
+		Assert.assertEquals(searchInValidItemResult(), dataProp.getProperty("invalidSearchMessage"));
 	}
 
 }

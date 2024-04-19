@@ -1,4 +1,4 @@
-package com.tutorialninja.qa.Common;
+package com.tutorialsninja.qa.Common;
 
 import java.io.FileInputStream;
 import java.util.Properties;
