@@ -1,5 +1,8 @@
 package com.tutorialsninja.qa.testcases;
 
+import static com.tutorialsninja.qa.pages.AccountPage.*;
+import static com.tutorialsninja.qa.pages.HomePage.*;
+import static com.tutorialsninja.qa.pages.LoginPage.*;
 import static com.tutorialsninja.qa.utilities.Utilities.*;
 
 
@@ -9,15 +12,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.tutorialninja.qa.Common.WebSetUp;
-import com.tutorialninja.qa.pages.HomePage;
-import com.tutorialninja.qa.pages.LoginPage;
-import com.tutorialninja.qa.pages.AccountPage;
-
-
-import static com.tutorialninja.qa.pages.HomePage.*;
-import static com.tutorialninja.qa.pages.LoginPage.*;
-import static com.tutorialninja.qa.pages.AccountPage.*;
+import com.tutorialsninja.qa.Common.WebSetUp;
+import com.tutorialsninja.qa.pages.AccountPage;
+import com.tutorialsninja.qa.pages.HomePage;
+import com.tutorialsninja.qa.pages.LoginPage;
 
 public class Login extends WebSetUp {
 

@@ -1,6 +1,10 @@
 package com.tutorialsninja.qa.testcases;
 
 
+import static com.tutorialsninja.qa.pages.AccountSuccessPage.*;
+import static com.tutorialsninja.qa.pages.HomePage.*;
+import static com.tutorialsninja.qa.pages.LoginPage.*;
+import static com.tutorialsninja.qa.pages.RegisterPage.*;
 import static com.tutorialsninja.qa.utilities.Utilities.generateEmailWithTimeStamp;
 
 import org.openqa.selenium.By;
@@ -9,16 +13,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.tutorialninja.qa.Common.WebSetUp;
-import com.tutorialninja.qa.pages.AccountSuccessPage;
-import com.tutorialninja.qa.pages.HomePage;
-import com.tutorialninja.qa.pages.LoginPage;
-import com.tutorialninja.qa.pages.RegisterPage;
-
-import static com.tutorialninja.qa.pages.HomePage.*;
-import static com.tutorialninja.qa.pages.LoginPage.*;
-import static com.tutorialninja.qa.pages.RegisterPage.*;
-import static com.tutorialninja.qa.pages.AccountSuccessPage.*;
+import com.tutorialsninja.qa.Common.WebSetUp;
+import com.tutorialsninja.qa.pages.AccountSuccessPage;
+import com.tutorialsninja.qa.pages.HomePage;
+import com.tutorialsninja.qa.pages.LoginPage;
+import com.tutorialsninja.qa.pages.RegisterPage;
 
 
 

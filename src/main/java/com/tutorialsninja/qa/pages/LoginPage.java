@@ -1,11 +1,11 @@
-package com.tutorialninja.qa.pages;
+package com.tutorialsninja.qa.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.tutorialninja.qa.Common.WebSetUp;
+import com.tutorialsninja.qa.Common.WebSetUp;
 
 public class LoginPage extends WebSetUp {
 	
