@@ -12,7 +12,7 @@ public class ExtentReport extends WebSetUp {
 	public static ExtentReports generateExtentReport() {
 
 		ExtentReports extentReports=new ExtentReports();
-		File extentReportFile=new File(System.getProperty("user.dir")+"\\test-output\\ExtentReports\\extentReport.html");
+		File extentReportFile=new File(System.getProperty("user.dir")+"\\test-output\\ExtentReports");
 		ExtentSparkReporter sparkReporter = new ExtentSparkReporter(extentReportFile);
 
 		sparkReporter.config().setTheme(Theme.DARK);
