@@ -11,9 +11,9 @@ import org.testng.annotations.Test;
 import com.tutorialsninja.qa.Common.WebSetUp;
 import com.tutorialsninja.qa.pages.SearchPage;
 
-public class Search extends WebSetUp{
+public class SearchTest extends WebSetUp{
 	
-	public Search() {
+	public SearchTest() {
 		super();
 	}
 	

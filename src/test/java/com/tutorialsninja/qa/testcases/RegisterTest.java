@@ -22,9 +22,9 @@ import com.tutorialsninja.qa.pages.RegisterPage;
 
 
 
-public class Register extends WebSetUp{
+public class RegisterTest extends WebSetUp{
 	
-	public Register() {
+	public RegisterTest() {
 		super();
 	}
 	
