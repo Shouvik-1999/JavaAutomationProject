@@ -17,9 +17,9 @@ import com.tutorialsninja.qa.pages.AccountPage;
 import com.tutorialsninja.qa.pages.HomePage;
 import com.tutorialsninja.qa.pages.LoginPage;
 
-public class Login extends WebSetUp {
+public class LoginTest extends WebSetUp {
 
-	public Login() {
+	public LoginTest() {
 		super();
 	}
 

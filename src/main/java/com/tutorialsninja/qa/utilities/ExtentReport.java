@@ -6,13 +6,16 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.tutorialsninja.qa.Common.WebSetUp;
+import static com.tutorialsninja.qa.utilities.Utilities.*;
 
 public class ExtentReport extends WebSetUp {
-
+	public static String resultPath; 
+	
 	public static ExtentReports generateExtentReport() {
 
 		ExtentReports extentReports=new ExtentReports();
-		File extentReportFile=new File(System.getProperty("user.dir")+"\\test-output\\ExtentReports");
+		resultPath=System.getProperty("user.dir")+"\\results\\"+generateRandomPath();
+		File extentReportFile=new File(resultPath);
 		ExtentSparkReporter sparkReporter = new ExtentSparkReporter(extentReportFile);
 
 		sparkReporter.config().setTheme(Theme.DARK);

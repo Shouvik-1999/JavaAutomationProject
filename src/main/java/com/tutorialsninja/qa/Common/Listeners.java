@@ -10,6 +10,10 @@ import com.aventstack.extentreports.Status;
 import com.tutorialsninja.qa.utilities.ExtentReport;
 
 
+import static com.tutorialsninja.qa.utilities.TakeScreenShots.*;
+
+
+
 public class Listeners implements ITestListener{
 	ExtentReports extentReport;
 	ExtentTest test;
@@ -27,7 +31,14 @@ public class Listeners implements ITestListener{
 
 	public void onTestFailure(ITestResult result) {
 		// TODO Auto-generated method stub
+		test.log(Status.INFO,result.getThrowable());
 		test.log(Status.FAIL, result.getName()+ " got failed");
+		getScreenShot();
+		try {
+		test.addScreenCaptureFromPath(ExtentReport.resultPath+"\\image.png");
+		}catch(Exception E) {
+			System.out.println(E);
+		}
 	}
 
 	public void onStart(ITestContext context) {

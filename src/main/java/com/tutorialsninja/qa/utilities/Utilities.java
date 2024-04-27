@@ -14,7 +14,11 @@ public class Utilities {
 		Date date=new Date();
 		return "krshouvik"+date.toString().replace(" ", "_").replace(":", "_")+"@gmail.com";
 	}
-
+	public static String generateRandomPath() {
+		Date date=new Date();
+		String Sc= date.toString().replace(" ", "-").replace(":", "-");
+		return Sc;
+	}
 	
 	public static Object[][] getData() {
 		Object[][]data=null;
@@ -41,6 +45,8 @@ public class Utilities {
 
 					case BOOLEAN:
 						data[i][j]=sh.getRow(i+1).getCell(j).getBooleanCellValue();
+						break;
+					default:
 						break;
 					}
 				}
